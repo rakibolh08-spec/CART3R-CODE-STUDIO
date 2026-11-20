@@ -11,33 +11,33 @@ const starter = {
 <html>
 <head><title>My first page</title></head>
 <body>
-  <h1>Hello, CART3R!</h1>
+  <h1>Hello, RAKIB!</h1>
   <p>Your live preview is ready.</p>
   <button onclick="document.querySelector('p').textContent='Button clicked!'">Try me</button>
 </body>
 </html>`,
   javascript: `// JavaScript playground
-const greeting = "Hello from CART3R Code Studio!";
+const greeting = "Hello from RAKIB Code Studio!";
 console.log(greeting);
 document.body.innerHTML = "<h1>" + greeting + "</h1><p>Edit the code and press Run.</p>";`,
   css: `body { font-family: system-ui; background: #101b16; color: #8cffb0; padding: 32px; }
 h1 { color: #48ff91; }`,
   python: `# Python example
-name = "CART3R"
+name = "RAKIB"
 print(f"Hello, {name}!")`,
   java: `public class Main {
   public static void main(String[] args) {
-    System.out.println("Hello, CART3R!");
+    System.out.println("Hello, RAKIB!");
   }
 }`,
   cpp: `#include <iostream>
 using namespace std;
 
 int main() {
-    cout << "Hello, CART3R!" << endl;
+    cout << "Hello, RAKIB!" << endl;
     return 0;
 }`,
-  typescript: `const message: string = "Hello, CART3R!";
+  typescript: `const message: string = "Hello, RAKIB!";
 console.log(message);`
 };
 
