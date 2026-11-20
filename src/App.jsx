@@ -173,7 +173,7 @@ function App() {
     <div className="matrix-bg" aria-hidden="true">{Array.from({length:22},(_,i)=><span key={i} style={{left:`${(i*4.73)%100}%`,animationDelay:`-${(i%9)*1.7}s`}}>{("01アイウエオCODE").repeat(5)}</span>)}</div>
     <header className="topbar">
       <button className="brand-mark" onClick={()=>setActivePanel("editor")}><Code2 size={22}/></button>
-      <div className="brand"><b>CART3R<span>.</span></b><small>CODE STUDIO</small></div>
+      <div className="brand"><b>RAKIB<span>.</span></b><small>CODE STUDIO</small></div>
       <div className="top-clock"><SpiderClock/></div>
       <div className="top-actions"><span className="status-pill"><i/> LOCAL WORKSPACE</span><button className="liquid-icon" onClick={()=>setMobileMenu(!mobileMenu)}><Menu size={19}/></button></div>
     </header>
@@ -228,7 +228,7 @@ function App() {
       {newKind==="file" && <><label>Parent folder</label><select value={targetFolder} onChange={e=>setTargetFolder(e.target.value)}>{(function flatten(nodes){return nodes.flatMap(n=>n.type==="folder"?[<option key={n.id} value={n.id}>{n.name}</option>,...flatten(n.children||[])]:[])})(tree)}</select></>}
       <button className="liquid-button primary modal-create" onClick={addNode}><Plus size={15}/> Create {newKind}</button>
     </div></div>}
-    <footer className="app-footer"><span>© 2026 CART3R CODE STUDIO</span><span>DESIGNED FOR MAKERS <b>●</b></span></footer>
+    <footer className="app-footer"><span>© 2026 RAKIB CODE STUDIO</span><span>DESIGNED FOR MAKERS <b>●</b></span></footer>
   </div>;
 }
 
