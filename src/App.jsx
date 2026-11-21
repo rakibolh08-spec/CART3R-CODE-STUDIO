@@ -211,39 +211,85 @@ function App() {
     }
   };
 
-  const runCode = () => {
-    if (!activeFile) return;
+  
+const runCode = () => {
+  if (!activeFile) return;
 
-    if (language === "html") {
-      setPreview(code);
-      setOutput("HTML preview updated successfully.");
-      setActivePanel("preview");
-      return;
+  const findFiles = (nodes, result = []) => {
+    nodes.forEach(node => {
+      if (node.type === "file") {
+        result.push(node);
+      } else if (node.type === "folder") {
+        findFiles(node.children || [], result);
+      }
+    });
+    return result;
+  };
+
+  const files = findFiles(tree);
+
+  const getFile = name =>
+    files.find(file => file.name.toLowerCase() === name.toLowerCase());
+
+  const htmlFile = getFile("index.html");
+
+  if (htmlFile) {
+    let html = htmlFile.content || "";
+
+    const cssFile = getFile("style.css") || getFile("styles.css");
+    const jsFile = getFile("script.js") || getFile("main.js");
+
+    if (cssFile && !html.includes(cssFile.name)) {
+      html = html.replace(
+        /<\/head>/i,
+        `<style>${cssFile.content || ""}</style></head>`
+      );
     }
 
-    if (language === "javascript") {
-      const safeDoc = `<!doctype html><html><head><meta charset="utf-8"><style>body{font:16px system-ui;background:#0a110d;color:#9bffb9;padding:20px}button{padding:10px 16px;border-radius:12px;border:1px solid #36d875;background:#10271a;color:#a6ffc0}</style></head><body><div id="app"></div><script>
+    if (jsFile && !html.includes(jsFile.name)) {
+      html = html.replace(
+        /<\/body>/i,
+        `<script>${jsFile.content || ""}<\/script></body>`
+      );
+    }
+
+    setPreview(html);
+    setOutput("Project preview updated successfully.");
+    setActivePanel("preview");
+    return;
+  }
+
+  if (language === "html") {
+    setPreview(code);
+    setOutput("HTML preview updated successfully.");
+    setActivePanel("preview");
+    return;
+  }
+
+  if (language === "javascript") {
+    const safeDoc = `<!doctype html><html><head><meta charset="utf-8"><style>body{font:16px system-ui;background:#0a110d;color:#9bffb9;padding:20px}button{padding:10px 16px;border-radius:12px;border:1px solid #36d875;background:#10271a;color:#a6ffc0}</style></head><body><div id="app"></div><script>
       const send=(...args)=>parent.postMessage({cart3rLog:args.map(x=>{try{return typeof x==='string'?x:JSON.stringify(x)}catch(e){return String(x)}}).join(' ')},'*');
       console.log=send; console.info=send; console.warn=send; console.error=send;
       try { ${code}\n } catch(e) { send('Error: '+e.message); }
       <\/script></body></html>`;
 
-      setPreview(safeDoc);
-      setOutput("JavaScript ran in an isolated preview frame. Console messages appear here.");
-      setActivePanel("preview");
-      return;
-    }
+    setPreview(safeDoc);
+    setOutput("JavaScript ran in an isolated preview frame. Console messages appear here.");
+    setActivePanel("preview");
+    return;
+  }
 
-    if (language === "css") {
-      setPreview(`<html><body><h1>CSS preview</h1><p>Your stylesheet is applied below.</p><style>${code}</style></body></html>`);
-      setOutput("CSS preview generated.");
-      setActivePanel("preview");
-      return;
-    }
+  if (language === "css") {
+    setPreview(`<html><body><h1>CSS preview</h1><p>Your stylesheet is applied below.</p><style>${code}</style></body></html>`);
+    setOutput("CSS preview generated.");
+    setActivePanel("preview");
+    return;
+  }
 
-    setOutput(`${languageOptions.find(x=>x[0]===language)?.[1] || language} source is ready, but this browser-only starter does not compile that language. Use a trusted local compiler or connect your own build backend. No code was sent to a server.`);
-    setActivePanel("output");
-  };
+  setOutput(`${languageOptions.find(x=>x[0]===language)?.[1] || language} source is ready, but this browser-only starter does not compile that language. Use a trusted local compiler or connect your own build backend. No code was sent to a server.`);
+  setActivePanel("output");
+};
+
 
   useEffect(() => {
     const listener = e => {
