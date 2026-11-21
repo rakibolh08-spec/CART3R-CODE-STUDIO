@@ -572,7 +572,7 @@ function App() {
                   wordWrap:"on",
                   tabSize:2,
                   colorDecorators:true,
-                  colorDecoratorsActivatedOn:"click"
+                  colorDecoratorsActivatedOn: "always"
                 }}
               />
             ) : (
