@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
+import { HexColorPicker } from "react-colorful";
 import {
   Activity, AppWindow, ChevronDown, Code2, Copy, File, FileCode2, Folder,
   FolderPlus, Gamepad2, Globe, Layers, Menu, MoreHorizontal, Play, Plus,
