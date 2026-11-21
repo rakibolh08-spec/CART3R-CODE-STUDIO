@@ -571,8 +571,9 @@ function App() {
                   smoothScrolling:true,
                   wordWrap:"on",
                   tabSize:2,
-                  colorDecorators:true,
-                  colorDecoratorsActivatedOn: "always"
+                  colorDecorators: true,
+                  colorDecoratorsActivatedOn: "clickAndHover",
+                  defaultColorDecorators: "always",
                 }}
               />
             ) : (
